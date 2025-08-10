@@ -8,6 +8,7 @@ load_dotenv()
 BASE_URL = os.getenv("BASE_URL")
 PAGE_URL = os.getenv("PAGE_URL")
 DOWNLOAD_DIR = os.getenv("DOWNLOAD_DIR")
+BASE_API_URL = os.getenv("BASE_API_URL")
 
 DB_CREDS = {
     "host": os.getenv("DB_HOST"),
