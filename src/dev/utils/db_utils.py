@@ -1,5 +1,5 @@
 import psycopg2
-from src.dev.config.settings import DB_CREDS
+from dev.config.settings import DB_CREDS
 
 def get_db_connection():
     """Établit et retourne une connexion à la base de données."""
