@@ -1,31 +1,31 @@
 import requests
 from bs4 import BeautifulSoup
 import os
-import psycopg2
 from datetime import datetime
 
 class BoursePDFScraper:
-    def __init__(self, base_url, page_url, download_dir="pdfs", db_conn=None):
-        self.base_url = base_url
-        self.page_url = page_url
-        self.download_dir = download_dir
-        os.makedirs(download_dir, exist_ok=True)
-        self.db_conn = db_conn  
+    def __init__(self, BASE_URL, PAGE_URL, DOWNLOAD_DIR, db_conn=None):
+        self.base_url = BASE_URL
+        self.page_url = PAGE_URL
+        self.download_dir = DOWNLOAD_DIR
+        self.db_conn = db_conn
 
     def _is_already_downloaded(self, url):
         cur = self.db_conn.cursor()
-        cur.execute("SELECT 1 FROM downloaded_pdfs WHERE url = %s", (url,))
+        cur.execute("SELECT 1 FROM editions_statistiques WHERE url = %s", (url,))
         return cur.fetchone() is not None
 
     def _mark_as_downloaded(self, filename, url):
         cur = self.db_conn.cursor()
         cur.execute(
-            "INSERT INTO downloaded_pdfs (filename, url, download_date) VALUES (%s, %s, %s)",
+            "INSERT INTO editions_statistiques (filename, url, download_date) VALUES (%s, %s, %s)",
             (filename, url, datetime.now())
         )
         self.db_conn.commit()
 
     def get_pdf_links(self):
+        offset = 0
+        limit = 9
         resp = requests.get(self.page_url)
         soup = BeautifulSoup(resp.text, "html.parser")
         links = []
