@@ -1,0 +1,6 @@
+src/__pycache__
+src/dev/__pycache__
+src/dev/dags/__pycache__
+src/dev/config/__pycache__
+src/dev/services/__pycache__
+src/dev/utils/__pycache__
