@@ -3,7 +3,7 @@ from airflow.operators.python import PythonOperator  # type: ignore
 from datetime import datetime, timedelta
 import sys
 sys.path.insert(0, '/opt/airflow/src')
-from src.run_pipeline import main as run_pipeline_main
+from run_pipeline import main as run_pipeline_main
 
 
 
