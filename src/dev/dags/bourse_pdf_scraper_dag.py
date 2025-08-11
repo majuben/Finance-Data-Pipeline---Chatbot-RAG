@@ -9,7 +9,7 @@ from run_pipeline import main as run_pipeline_main
 
 default_args = {  
     'owner': 'airflow',
-    'start_date': datetime(2025, 8, 11),
+    'start_date': datetime(2025, 8, 11, 13, 30, 0), 
     'retries': 1,
     'retry_delay': timedelta(minutes=5),
 }
@@ -17,8 +17,9 @@ default_args = {
 with DAG(
     'bourse_pdf_scraper',
     default_args=default_args,
-    schedule_interval='@weekly',
-    catchup=False,
+    schedule_interval='30 13 * * 1',
+    catchup=True,
+    max_active_runs=1,
 ) as dag:
 
     task_pipeline = PythonOperator(
