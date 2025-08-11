@@ -1,15 +1,15 @@
 from airflow import DAG
-from airflow.operators.python import PythonOperator
+from airflow.operators.python import PythonOperator  # type: ignore
 from datetime import datetime, timedelta
 import sys
 sys.path.insert(0, '/opt/airflow/src')
-from dev.run_pipeline import main as run_pipeline_main
+from src.run_pipeline import main as run_pipeline_main
 
 
 
-default_args = {
+default_args = {  
     'owner': 'airflow',
-    'start_date': datetime(2025, 8, 10),
+    'start_date': datetime(2025, 8, 11),
     'retries': 1,
     'retry_delay': timedelta(minutes=5),
 }
